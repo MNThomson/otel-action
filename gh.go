@@ -20,12 +20,12 @@ func createTraces(ctx context.Context, conf configType) error {
 
 	client := github.NewClient(token)
 
-	workflowID, err := strconv.ParseInt(conf.workflowID, 10, 64)
+	runID, err := strconv.ParseInt(conf.runID, 10, 64)
 	if err != nil {
 		return err
 	}
 
-	workflowData, _, err := client.Actions.GetWorkflowRunByID(ctx, conf.owner, conf.repo, workflowID)
+	workflowData, _, err := client.Actions.GetWorkflowRunByID(ctx, conf.owner, conf.repo, runID)
 	if err != nil {
 		return err
 	}
@@ -33,7 +33,7 @@ func createTraces(ctx context.Context, conf configType) error {
 	ctx, workflowSpan := tracer.Start(ctx, *workflowData.Name, trace.WithTimestamp(workflowData.CreatedAt.Time))
 	defer workflowSpan.End(trace.WithTimestamp(workflowData.UpdatedAt.Time))
 
-	jobs, _, err := client.Actions.ListWorkflowJobs(ctx, conf.owner, conf.repo, workflowID, &github.ListWorkflowJobsOptions{})
+	jobs, _, err := client.Actions.ListWorkflowJobs(ctx, conf.owner, conf.repo, runID, &github.ListWorkflowJobsOptions{})
 	if err != nil {
 		return err
 	}

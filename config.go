@@ -10,7 +10,6 @@ type configType struct {
 	otelEndpoint string
 	otelHeaders  map[string]string
 	serviceName  string
-	workflowID   string
 	runID        string
 	repository   string
 	owner        string
@@ -44,11 +43,6 @@ func getConfig() (configType, error) {
 		return configType{}, fmt.Errorf("missing env: GITHUB_RUN_ID")
 	}
 
-	workflowID := os.Getenv("GITHUB_WORKFLOW")
-	if len(workflowID) == 0 {
-		return configType{}, fmt.Errorf("missing env: GITHUB_WORKFLOW")
-	}
-
 	githubToken := os.Getenv("GITHUB_TOKEN")
 
 	repoDetails := strings.Split(repository, "/")
@@ -69,7 +63,6 @@ func getConfig() (configType, error) {
 		otelEndpoint: endpoint,
 		otelHeaders:  headersMap,
 		serviceName:  serviceName,
-		workflowID:   workflowID,
 		runID:        runID,
 		repository:   repository,
 		owner:        repoDetails[0],
