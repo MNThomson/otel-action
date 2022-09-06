@@ -1,0 +1,21 @@
+name: OTEL Action Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test-action:
+    name: Test OTEL action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Action
+        uses: actions/checkout@v3
+      - name: Run otel-action
+        uses: ./
+        with:
+          ENDPOINT: ${{ secrets.ENDPOINT }}
+          HEADERS: ${{ secrets.HEADERS }}
+          SERVICE_NAME: "otel-action"
