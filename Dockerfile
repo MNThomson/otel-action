@@ -28,7 +28,7 @@ WORKDIR /src
 COPY ./go.mod ./go.sum ./
 RUN go mod download
 
-COPY *.go Makefile ./
+COPY *.go ./
 
 # Build the binary
 ENV CGO_ENABLED=0
