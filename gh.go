@@ -36,10 +36,7 @@ func createTraces(ctx context.Context, conf configType) error {
 		return err
 	}
 
-	workflowEnd := workflowData.UpdatedAt.Time
 	ctx, workflowSpan := tracer.Start(ctx, *workflowData.Name, trace.WithTimestamp(workflowData.CreatedAt.Time))
-	defer workflowSpan.End(trace.WithTimestamp(workflowEnd))
-
 	for _, job := range jobs.Jobs {
 		ctx, jobSpan := tracer.Start(ctx, *job.Name, trace.WithTimestamp(job.GetStartedAt().Time))
 
@@ -50,9 +47,6 @@ func createTraces(ctx context.Context, conf configType) error {
 				stepSpan.End(trace.WithTimestamp(step.CompletedAt.Time))
 			} else {
 				stepSpan.End()
-				if *job.RunID == runID {
-					workflowEnd = time.Now()
-				}
 			}
 		}
 
@@ -62,6 +56,7 @@ func createTraces(ctx context.Context, conf configType) error {
 			jobSpan.End()
 		}
 	}
+	workflowSpan.End(trace.WithTimestamp(time.Now()))
 
 	return nil
 }
