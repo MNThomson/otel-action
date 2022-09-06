@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Do some random work
-        run: sleep $[ ( $RANDOM % 10 )  + 1 ]s
+        run: sleep $[$RANDOM % 10].$[$RANDOM % 10]s
 
   job2:
     name: Random Job 2
     runs-on: ubuntu-latest
     steps:
       - name: Do some random work
-        run: sleep $[ ( $RANDOM % 10 )  + 1 ]s
+        run: sleep $[$RANDOM % 10].$[$RANDOM % 10]s
 
   test-action:
     name: Test OTEL action
