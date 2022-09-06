@@ -50,9 +50,6 @@ func getConfig() (configType, error) {
 	}
 
 	githubToken := os.Getenv("GITHUB_TOKEN")
-	if len(githubToken) == 0 {
-		return configType{}, fmt.Errorf("missing env: GITHUB_TOKEN")
-	}
 
 	repoDetails := strings.Split(repository, "/")
 	if len(repoDetails) != 2 {
