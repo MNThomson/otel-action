@@ -36,7 +36,7 @@ func createTraces(ctx context.Context, conf configType) error {
 		return err
 	}
 
-	ctx, workflowSpan := tracer.Start(ctx, *workflowData.Name, trace.WithTimestamp(workflowData.CreatedAt.Time))
+	ctx, workflowSpan := tracer.Start(ctx, *workflowData.Name, trace.WithTimestamp(workflowData.GetCreatedAt().Time))
 	for _, job := range jobs.Jobs {
 		ctx, jobSpan := tracer.Start(ctx, *job.Name, trace.WithTimestamp(job.GetStartedAt().Time))
 
@@ -44,14 +44,14 @@ func createTraces(ctx context.Context, conf configType) error {
 			_, stepSpan := tracer.Start(ctx, *step.Name, trace.WithTimestamp(step.GetStartedAt().Time))
 
 			if step.CompletedAt != nil {
-				stepSpan.End(trace.WithTimestamp(step.CompletedAt.Time))
+				stepSpan.End(trace.WithTimestamp(step.GetCompletedAt().Time))
 			} else {
 				stepSpan.End()
 			}
 		}
 
 		if job.CompletedAt != nil {
-			jobSpan.End(trace.WithTimestamp(job.CompletedAt.Time))
+			jobSpan.End(trace.WithTimestamp(job.GetCompletedAt().Time))
 		} else {
 			jobSpan.End()
 		}
