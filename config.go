@@ -44,9 +44,9 @@ func getConfig() (configType, error) {
 		return configType{}, fmt.Errorf("missing env: GITHUB_RUN_ID")
 	}
 
-	workflowID := os.Getenv("GITHUB_WORKFLOW_ID")
+	workflowID := os.Getenv("GITHUB_WORKFLOW")
 	if len(workflowID) == 0 {
-		return configType{}, fmt.Errorf("missing env: GITHUB_WORKFLOW_ID")
+		return configType{}, fmt.Errorf("missing env: GITHUB_WORKFLOW")
 	}
 
 	githubToken := os.Getenv("GITHUB_TOKEN")
