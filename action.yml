@@ -1,0 +1,30 @@
+name: "OTEL Action"
+author: "MNThomson"
+description: "Record GitHub workflow metrics as traces for an Open Telemery compatible endpoint"
+branding:
+  icon: activity
+  color: blue
+
+inputs:
+  ENDPOINT:
+    description: "Endpoint to send OTEL data to"
+    required: true
+  HEADERS:
+    description: "Authentication headers for OTEL endpoint"
+    required: true
+  SERVICE_NAME:
+    description: "Service/Dataset name"
+    required: true
+  GITHUB_TOKEN:
+    description: "GitHub token for private repos"
+    required: false
+
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  # image: "docker://gcr.io/mnthomson/otel-action:latest"
+  env:
+    OTEL_EXPORTER_ENDPOINT: ${{ inputs.ENDPOINT }}
+    OTEL_EXPORTER_HEADERS: ${{ inputs.HEADERS }}
+    OTEL_SERVICE_NAME: ${{ inputs.SERVICE_NAME }}
+    GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
