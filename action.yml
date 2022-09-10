@@ -27,3 +27,4 @@ runs:
     OTEL_EXPORTER_ENDPOINT: ${{ inputs.ENDPOINT }}
     OTEL_EXPORTER_HEADERS: ${{ inputs.HEADERS }}
     OTEL_SERVICE_NAME: ${{ inputs.SERVICE_NAME }}
+    GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
