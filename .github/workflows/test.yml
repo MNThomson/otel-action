@@ -34,3 +34,4 @@ jobs:
           ENDPOINT: ${{ secrets.ENDPOINT }}
           HEADERS: ${{ secrets.HEADERS }}
           SERVICE_NAME: "otel-action"
+          VERSION: "pr-5"

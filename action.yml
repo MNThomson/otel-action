@@ -18,11 +18,14 @@ inputs:
   GITHUB_TOKEN:
     description: "GitHub token for private repos"
     required: false
+  VERSION:
+    description: "Which docker image to run"
+    default: "latest"
+    required: false
 
 runs:
   using: "docker"
-  image: "Dockerfile"
-  # image: "docker://gcr.io/mnthomson/otel-action:latest"
+  image: "docker://gcr.io/mnthomson/otel-action:${{ inputs.VERSION }}"
   env:
     OTEL_EXPORTER_ENDPOINT: ${{ inputs.ENDPOINT }}
     OTEL_EXPORTER_HEADERS: ${{ inputs.HEADERS }}
