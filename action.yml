@@ -21,7 +21,7 @@ inputs:
 
 runs:
   using: "docker"
-  image: "docker://gcr.io/mnthomson/otel-action:latest"
+  image: "docker://ghcr.io/mnthomson/otel-action:latest"
   env:
     OTEL_EXPORTER_ENDPOINT: ${{ inputs.ENDPOINT }}
     OTEL_EXPORTER_HEADERS: ${{ inputs.HEADERS }}
