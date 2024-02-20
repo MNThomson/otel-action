@@ -50,13 +50,16 @@ func getConfig() (configType, error) {
 		return configType{}, fmt.Errorf("invalid env: GITHUB_REPOSITORY")
 	}
 
-	headersSplit := strings.Split(headers, ":")
-	if len(headersSplit) != 2 {
-		return configType{}, fmt.Errorf("invalid env: OTEL_EXPORTER_HEADERS")
-	}
+	headersMap := map[string]string{}
 
-	headersMap := map[string]string{
-		headersSplit[0]: headersSplit[1],
+	headersSplit := strings.Split(headers, ",")
+	for i := 0; i < len(headersSplit); i++ {
+		splitHeaders := strings.Split(headersSplit[i], ":")
+		if len(splitHeaders) != 2 {
+			return configType{}, fmt.Errorf("invalid env: OTEL_EXPORTER_HEADERS")
+		}
+		headersMap[splitHeaders[0]] = splitHeaders[1]
+
 	}
 
 	return configType{
