@@ -1,4 +1,3 @@
-<!-- markdownlint-disable MD033 MD013 -->
 <h1 align="center">
     <br>
         OpenTelemetry Action
@@ -15,17 +14,22 @@
         >
     </a>
 </p>
-<!-- markdownlint-enable -->
+
 
 ---
 
-<!-- markdownlint-disable-next-line MD002 -->
 ## About
 
-`otel-action` is currently in early Alpha.
-Branch `master` is not guaranteed to be stable and breaking changes may be
-introduced without notice.
+Running `otel-action` at the end of a GitHub workflow will upload [OpenTelemetry](https://opentelemetry.io/) spans for each job (and job step) to an OTel compatible endpoint. This provides observability into CI pipelines, and provides a quick method to find offending commits that are the root cause of a CI job becoming slower.
 
+Below is an example trace from this repository's [test workflow](.github/workflows/test.yml) being viewed in [Honeycomb.io](https://www.honeycomb.io/)'s UI (they have an awesome free-forever tier)!
+
+<p align="center">
+    <img
+        src="assets/honeycomb-example-trace.png"
+        alt="Honeycomb Example Trace"
+    >
+</p>
 
 ## Example usage
 
