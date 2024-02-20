@@ -1,1 +1,3 @@
 .env
+otel-action
+*.bak
