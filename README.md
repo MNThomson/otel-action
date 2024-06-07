@@ -41,3 +41,5 @@ Below is an example trace from this repository's [test workflow](.github/workflo
     headers: ${{ secrets.HEADERS }}
     service_name: "MyDatasetName"
 ```
+
+Checkout the [`test.yml`](.github/workflows/test.yml) worflow as well.
